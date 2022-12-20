@@ -26,9 +26,8 @@ function App() {
 
   return (
     <div className="app">
-      {/* {console.log('books', books)} */}
       <Routes>
-        <Route path="/search" element={<Search />} />
+        <Route path="/search" element={<Search updateBook={updateBook} books={books} />} />
         <Route
           path="/"
           element={<BooksShelves books={books} updateBook={updateBook} />}

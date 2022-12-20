@@ -1,16 +1,34 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as BookAPI from '../BooksAPI';
+import Book from './Book';
+import NoResult from './NoResult';
 
-const Search = () => {
+const Search = ({ updateBook, books }) => {
   const [searchBook, setSearchBook] = useState('');
+  const [searchingResult, setSearchingResult] = useState([]);
 
   // ############## Searching in API ######
   useEffect(() => {
-    (async () => {
-      const searchResponse = await BookAPI.search(searchBook);
-      console.log(searchResponse);
-    })();
+    // ############## Debounce timer ######
+    const timer = setTimeout(async () => {
+      try {
+        if (searchBook) {
+          const response = await BookAPI?.search(searchBook);
+
+          response.error
+            ? setSearchingResult([])
+            : setSearchingResult(response);
+        } else {
+          setSearchingResult([]);
+        }
+      } catch (error) {
+        setSearchingResult([]);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchBook]);
 
   return (
@@ -24,12 +42,22 @@ const Search = () => {
             type="text"
             value={searchBook}
             placeholder="Search by title, author, or ISBN"
-            onChange={(e) => setSearchBook(e.target.value)}
+            onChange={(e) => setSearchBook(e?.target?.value)}
           />
         </div>
       </div>
       <div className="search-books-results">
-        <ol className="books-grid"></ol>
+        <ol className="books-grid">
+          {searchingResult.length > 0 ? (
+            searchingResult?.map((book) => (
+              <li key={book?.id}>
+                <Book book={book} updateBook={updateBook} />
+              </li>
+            ))
+          ) : (
+            <NoResult />
+          )}
+        </ol>
       </div>
     </div>
   );
