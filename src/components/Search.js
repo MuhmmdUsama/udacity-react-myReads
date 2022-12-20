@@ -1,15 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Search = ({setShowSearchpage,showSearchPage}) => {
+const Search = ({ setShowSearchpage, showSearchPage }) => {
   return (
     <div className="search-books">
       <div className="search-books-bar">
-        <a
-          className="close-search"
-          onClick={() => setShowSearchpage(!showSearchPage)}
-        >
-          Close
-        </a>
+        <Link to='/' className="close-search">Close</Link>
         <div className="search-books-input-wrapper">
           <input type="text" placeholder="Search by title, author, or ISBN" />
         </div>
