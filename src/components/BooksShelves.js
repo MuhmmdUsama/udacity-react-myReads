@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 
 const BooksShelves = ({ books, updateBook }) => {
+  // filtering books according to shelf state
   const category = (cat) => {
     return books.filter((book) => book?.shelf === cat);
   };

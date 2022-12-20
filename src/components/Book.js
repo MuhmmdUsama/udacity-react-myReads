@@ -12,6 +12,7 @@ const Book = ({ book,updateBook }) => {
             backgroundImage: `url(${book?.imageLinks?.thumbnail})`,
           }}
         ></div>
+
         <div className="book-shelf-changer">
           <select value={book?.shelf} onChange={(e)=>{updateBook(book,e.target.value)}}>
             <option value="none" disabled>

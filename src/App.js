@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router-dom';
 function App() {
   const [books, setBooks] = useState([]);
 
-  // catching api respond
+  // ############## catching api respond ######
   useEffect(() => {
     (async () => {
       const respond = await BooksAPI.getAll();
@@ -17,17 +17,16 @@ function App() {
     })();
   }, []);
 
+  // ############## Updating books shelves ######
   const updateBook = (book, shelf) => {
     BooksAPI.update(book, shelf);
     const updatedList = books.filter((b) => b.id !== book.id);
-
     setBooks([...updatedList, { ...book, shelf }]);
-    console.log('updatedList', updatedList);
   };
 
   return (
     <div className="app">
-      {console.log('books', books)}
+      {/* {console.log('books', books)} */}
       <Routes>
         <Route path="/search" element={<Search />} />
         <Route
