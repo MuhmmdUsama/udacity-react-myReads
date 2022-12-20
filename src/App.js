@@ -1,25 +1,23 @@
 import './App.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import * as BooksAPI from './BooksAPI';
 import BooksShelves from './components/BooksShelves';
 import Search from './components/Search';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const [showSearchPage, setShowSearchpage] = useState(false);
+  useEffect(() => {
+    (async () => {
+      const respond = await BooksAPI.getAll();
+      console.log(respond);
+    })();
+  }, []);
 
   return (
     <div className="app">
       <Routes>
-        <Route
-          path="/search"
-          element={
-            <Search
-              setShowSearchpage={setShowSearchpage}
-              showSearchPage={showSearchPage}
-            />
-          }
-        />
+        <Route path="/search" element={<Search />} />
         <Route path="/" element={<BooksShelves />} />
       </Routes>
     </div>
