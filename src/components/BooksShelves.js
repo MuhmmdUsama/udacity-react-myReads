@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Bookshelf from './Bookshelf';
 
-const BooksShelves = ({ books }) => {
+const BooksShelves = ({ books, updateBook }) => {
   const category = (cat) => {
     return books.filter((book) => book?.shelf === cat);
   };
@@ -17,9 +17,18 @@ const BooksShelves = ({ books }) => {
           <Bookshelf
             bookShelf={category('currentlyReading')}
             state="currentlyReading"
+            updateBook={updateBook}
           />
-          <Bookshelf bookShelf={category('wantToRead')} state="wantToRead" />
-          <Bookshelf bookShelf={category('read')} state="read" />
+          <Bookshelf
+            bookShelf={category('wantToRead')}
+            state="wantToRead"
+            updateBook={updateBook}
+          />
+          <Bookshelf
+            bookShelf={category('read')}
+            state="read"
+            updateBook={updateBook}
+          />
         </div>
       </div>
       <div className="open-search">
