@@ -7,18 +7,22 @@ import Search from './components/Search';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
+  // catching api respond
   useEffect(() => {
     (async () => {
       const respond = await BooksAPI.getAll();
-      console.log(respond);
+      setBooks(respond);
     })();
   }, []);
 
+  const [books, setBooks] = useState([]);
+
   return (
     <div className="app">
+      {console.log('books', books)}
       <Routes>
         <Route path="/search" element={<Search />} />
-        <Route path="/" element={<BooksShelves />} />
+        <Route path="/" element={<BooksShelves books={books} />} />
       </Routes>
     </div>
   );
