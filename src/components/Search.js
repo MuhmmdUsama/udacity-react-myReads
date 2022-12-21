@@ -13,27 +13,19 @@ const Search = ({ updateBook, books }) => {
     // ############## Debounce timer ######
     const timer = setTimeout(async () => {
       try {
-        if (searchBook) {
-          const response = await BookAPI?.search(searchBook);
+        const response = await BookAPI?.search(searchBook);
 
-          // response.error
-          //   ? setSearchingResult([])
-          //   : setSearchingResult(response);
-          
-          if (response.error) {
-            setSearchingResult([]);
-          } else {
-            response.forEach((res) => {
-              books.forEach((book) => {
-                if (res.id === book.id) {
-                  res.shelf = book.shelf;
-                }
-              });
-            });
-            setSearchingResult(response);
-          }
-        } else {
+        if (response.error && searchBook) {
           setSearchingResult([]);
+        } else {
+          response.forEach((res) => {
+            books.forEach((book) => {
+              if (res.id === book.id) {
+                res.shelf = book.shelf;
+              }
+            });
+          });
+          setSearchingResult(response);
         }
       } catch (error) {
         setSearchingResult([]);
@@ -54,7 +46,7 @@ const Search = ({ updateBook, books }) => {
           <input
             type="text"
             value={searchBook}
-            placeholder="Search by title, author, or ISBN"
+            placeholder="Search by title"
             onChange={(e) => setSearchBook(e?.target?.value)}
           />
         </div>
