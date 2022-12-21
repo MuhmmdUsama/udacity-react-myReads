@@ -8,8 +8,8 @@ MyReads lets you manage your digital bookshelf. It supports three shelves:
 - Want to Read
 - Read
 
-<img src="./screenshots/mainpage.png" width="400" />
-<img src="./screenshots/searching.png" width="400" />
+<img src="./screenshots/mainpage.png" width="600" />
+<img src="./screenshots/searching.png" width="600" />
 
 ## TL;DR
 
