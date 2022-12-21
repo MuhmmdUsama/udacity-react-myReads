@@ -96,3 +96,10 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 ## Contributing.
 
 For details, check out [CONTRIBUTING](https://github.com/udacity/nd0191-c1-myreads).
+
+### Author
+
+👤 **Muhmmd Usama** 
+- GitHub: [@muhmmdusama](https://github.com/muhmmdusama)
+- Twitter: [@muhmmdusama](https://twitter.com/muhmmdusama)
+- LinkedIn: [muhmmdusama](https://linkedin.com/in/muhmmdusama)
