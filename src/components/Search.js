@@ -16,9 +16,22 @@ const Search = ({ updateBook, books }) => {
         if (searchBook) {
           const response = await BookAPI?.search(searchBook);
 
-          response.error
-            ? setSearchingResult([])
-            : setSearchingResult(response);
+          // response.error
+          //   ? setSearchingResult([])
+          //   : setSearchingResult(response);
+          
+          if (response.error) {
+            setSearchingResult([]);
+          } else {
+            response.forEach((res) => {
+              books.forEach((book) => {
+                if (res.id === book.id) {
+                  res.shelf = book.shelf;
+                }
+              });
+            });
+            setSearchingResult(response);
+          }
         } else {
           setSearchingResult([]);
         }
@@ -29,7 +42,7 @@ const Search = ({ updateBook, books }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [searchBook]);
+  }, [searchBook, books]);
 
   return (
     <div className="search-books">

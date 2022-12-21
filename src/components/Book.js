@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Book = ({ book,updateBook }) => {
+const Book = ({ book, updateBook }) => {
   return (
     <div className="book">
       <div className="book-top">
@@ -14,7 +14,12 @@ const Book = ({ book,updateBook }) => {
         ></div>
 
         <div className="book-shelf-changer">
-          <select value={book?.shelf} onChange={(e)=>{updateBook(book,e.target.value)}}>
+          <select
+            defaultValue={book?.shelf ? book?.shelf : 'none'}
+            onChange={(e) => {
+              updateBook(book, e.target.value);
+            }}
+          >
             <option value="none" disabled>
               Move to...
             </option>
